@@ -166,7 +166,11 @@ const UsersTable = () => {
         onClose={() => setIsOpen(false)}
         onAnimationComplete={focusFirstInput}
       >
-        <AddUser onSubmit={onSubmit} firstInputRef={firstInputRef} />
+        <AddUser
+          onSubmit={onSubmit}
+          firstInputRef={firstInputRef}
+          isOpen={isOpen}
+        />
       </AnimatedSheet>
     </div>
   );

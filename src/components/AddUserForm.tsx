@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -11,10 +10,12 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 interface AddUserProps {
   onSubmit: (formData: UserFormData) => void;
   firstInputRef: React.RefObject<HTMLInputElement | null>;
+  isOpen: boolean;
 }
 
 interface UserFormData {
@@ -36,7 +37,11 @@ const roles = [
   "DevOps Engineer",
 ];
 
-const AddUser: React.FC<AddUserProps> = ({ onSubmit, firstInputRef }) => {
+const AddUser: React.FC<AddUserProps> = ({
+  onSubmit,
+  firstInputRef,
+  isOpen,
+}) => {
   const isAdmin = true;
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<UserFormData>({
@@ -87,6 +92,21 @@ const AddUser: React.FC<AddUserProps> = ({ onSubmit, firstInputRef }) => {
       });
     }, 2000);
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setFormData({
+        id: "",
+        employeeCode: "",
+        firstName: "",
+        lastName: "",
+        emailId: "",
+        clientName: "",
+        role: "",
+        isActive: false,
+      });
+    }
+  }, [isOpen]);
 
   return (
     <form onSubmit={handleSubmit}>
