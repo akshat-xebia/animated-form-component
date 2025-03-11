@@ -1,54 +1,81 @@
-# React + TypeScript + Vite
+# Reusable Animated Sheet Component
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A resuable and animated sheet component for React applications built with Framer Motion and Material UI.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This component provides an elegant side panel animation with configurable properties, perfect for forms, details panels, and supplementary content in modern web applications.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Smooth animation with customizable spring physics
+- Backdrop overlay with opacity transitions
+- Focus management for accessible form interactions
+- Responsive design that works across device sizes
+- TypeScript support with full type definitions
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/akshat-xebia/animated-form-component.git
+cd animated-sheet-component
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Start the development server:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+## Implementation
+
+The component consists of three main parts:
+
+1. **AnimatedSheet**: A slide-in panel with animation controls
+2. **UsersTable**: Example implementation showing data in tabular format
+3. **AddUser**: Form component demonstrating proper form handling within the sheet
+
+## Props
+
+| Prop                | Type      | Description                                          |
+| ------------------- | --------- | ---------------------------------------------------- |
+| isOpen              | boolean   | Controls the visibility of the sheet                 |
+| onClose             | function  | Callback function triggered when the sheet is closed |
+| children            | ReactNode | Content to be rendered inside the sheet              |
+| onAnimationComplete | function  | Optional callback when animation completes           |
+
+## Example
+
+```jsx
+import AnimatedSheet from "./components/AnimatedSheet";
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setIsOpen(true)}>Open Sheet</button>
+
+      <AnimatedSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <h2>Sheet Content</h2>
+        <p>Your content goes here</p>
+      </AnimatedSheet>
+    </div>
+  );
+}
+```
+
+## Best Practices
+
+- Form states are automatically reset when the sheet closes
+- First input field receives focus when the sheet opens
+- Animation parameters are optimized for smooth transitions
+
+## Author
+
+Akshat Dubey
